@@ -1,3 +1,4 @@
+*.pdf
 config.py
 /output/
 /data/statement/
