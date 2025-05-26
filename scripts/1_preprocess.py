@@ -19,7 +19,9 @@ def process_problem(prob):
         prob['options'] = list(map(lambda x: x[3:], prob['options']))
     elif choices == 5:
         prob['type'] = 'MR'
-        option_e = prob['options'][4][3:]
+        option_e = prob['options'][4][3:].lower()
+        if option_e.startswith('both '):
+            option_e = option_e[5:]
         prob['options'] = prob['options'][:4]
         if len(option_e.split(' and ')) == 2:
             prob['answer'] = list(map(lambda x: x.upper(), option_e.split(' and ')))
@@ -35,6 +37,8 @@ def process_problem(prob):
         prob['options'] = list(map(lambda x: x[3:], prob['options']))
     else:
         assert False
+    for answer in prob['answer']:
+        assert len(answer) == 1
     return prob
 
 
@@ -43,7 +47,7 @@ dirname = os.path.abspath(os.path.dirname(__file__))
 
 problemset_file = os.path.join(dirname, "..", "data", "problemset.json")
 
-with open(problemset_file, "r") as f:
+with open(problemset_file, "r", encoding='utf-8') as f:
     problemset = json.load(f)
 
 problems = []
@@ -56,10 +60,10 @@ for chap, prob_list in problemset.items():
             }
         ))
 
-output_dir = os.path.join(dirname, "..", "data", "problem")
+output_dir = os.path.join(dirname, "..", "data", "statement")
 for prob in problems:
     filename = os.path.join(output_dir, prob['chapter'], prob['name'] + '.json')
     if not os.path.exists(os.path.dirname(filename)):
         os.makedirs(os.path.dirname(filename))
-    with open(filename, 'w') as f:
+    with open(filename, 'w', encoding='utf-8') as f:
         json.dump(prob, f)
