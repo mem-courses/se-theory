@@ -24,7 +24,7 @@
   semester: "Spring-Summer 2025",
   course-code: "CS3165M",
   course-fullname: "Software Engineering",
-  page-margin: (left: 4mm, right: 4mm, top: 12mm, bottom: 12mm),
+  page-margin: (left: 6mm, right: 6mm, top: 12mm, bottom: 10mm),
 ) = {
   if (course-fullname == "") {
     course-fullname = course
@@ -49,13 +49,19 @@
           return none
         }
 
-        set text(font: font-song, 10pt, baseline: 8pt, spacing: 3pt)
+        set text(font: font-song, size: 10pt, baseline: 3mm)
 
         grid(
           columns: (1fr, 1fr, 1fr),
-          align(left, course),
+          align(left, title),
           [] /* align(center, title)*/,
-          align(right, date),
+          align(
+            right,
+            [
+              #course-fullname
+              (#course-code)
+            ],
+          ),
         )
 
         line(length: 100%, stroke: 0.5pt)
@@ -67,7 +73,7 @@
   // 页脚
   set page(
     footer: {
-      set text(font: font-song, 10pt, baseline: 8pt, spacing: 3pt)
+      set text(font: font-song, size: 8pt)
       set align(center)
 
       grid(
@@ -77,7 +83,7 @@
     },
   )
 
-  set text(font: font-song, lang: "en", size: 11pt)
+  set text(font: font-song, lang: "en", size: 10pt)
   show math.equation: set text(weight: 400)
 
   // set heading(numbering: "1.1)")
@@ -121,9 +127,13 @@
   show heading: set block(below: 1em)
   set par(
     leading: 0.5em,
-    spacing: 0.75em,
-    justify: true,
+    spacing: 0.5em,
+    // justify: true,
     first-line-indent: indent,
+  )
+  set text(
+    tracking: -0.0125em,
+    cjk-latin-spacing: none,
   )
   show "。": "．"
   show "（": "("
@@ -149,7 +159,7 @@
   width: 100%,
   breakable: true,
   grid(
-    row-gutter: 0.6em,
+    row-gutter: 0.5em,
     columns: (1.5em, 1fr),
     ..cells,
   ),
@@ -164,12 +174,29 @@
 }
 
 #let explaination = it => block(
-  stroke: 0.5pt + black,
-  radius: 0.25em,
-  inset: 0.5em,
+  stroke: 0.375pt + black,
+  radius: 0.125em,
+  inset: 0.275em,
   breakable: true,
   {
-    set text(size: 0.8em)
+    set text(size: 0.6em)
+    set par(justify: true)
     it
   },
 )
+
+#let spacing = v(1em)
+
+#let index = it => {
+  h(1fr)
+  super(text(weight: "regular")[#it])
+}
+
+#let hint = {
+  block(
+    [
+      感谢小角龙学长爬取的题目源数据，使用 GPT 4.1 制作翻译和题目解析。问题反馈请联系 \@memset0
+    ]
+  )
+  v(1em)
+}

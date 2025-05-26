@@ -13,7 +13,7 @@ TEMPLATE_HEADER = f'''
   ),
 )
 
-感谢小角龙学长爬取的数据。使用 GPT 4.1 制作翻译与题解。
+#hint
 '''
 
 dirname = os.path.dirname(os.path.abspath(__file__))
@@ -22,11 +22,14 @@ explaination_dir = os.path.join(dirname, "..", "data", "explanation")
 output_dir = os.path.join(dirname, "..", "build")
 
 
-def parse_statement(statement, options, answer=[]):
+def parse_statement(statement, options, answer=[], index=None):
+    statement = statement.replace('"', '\\"')
+    if index is not None:
+        statement += f'" + index({index}) + "'
     if len(answer) == 0:
-        result = '#statement([($quad$) ] + "' + statement.replace('"', '\\"') + '")'
+        result = '#statement([($quad$) ] + "' + statement + '")'
     else:
-        result = f'#text([({"".join(answer)}) ] + "' + statement.replace('"', '\\"') + '")'
+        result = f'#text([({"".join(answer)}) ] + "' + statement + '")'
     if options is not None:
         result += '\n\n#options(\n'
         for char, option in zip('ABCD', options):
@@ -51,6 +54,7 @@ for task in tasks:
     task['name'] = f'SE_v{VERSION}_{'+'.join(task["fields"])}'
     task['data'] = []
 
+index = 0
 for chapter in os.listdir(source_dir):
     for problem in os.listdir(os.path.join(source_dir, chapter)):
         problem = problem.split('.')[0]
@@ -58,14 +62,17 @@ for chapter in os.listdir(source_dir):
             prob = json.load(f)
         print('Processing %s...' % problem)
 
+        index += 1
+        prefix = f'{int(prob["chapter"])}-'
+
         if prob['type'] == 'TF':
-            en = parse_statement(prob['topic'], None)
-            cn = parse_statement(prob['topic_cn'], None)
+            en = parse_statement(prefix + prob['topic'], None, index=index)
+            cn = parse_statement(prefix + prob['topic_cn'], None, index=index)
             en_ans = parse_statement(prob['topic'], None, prob['answer'])
             cn_ans = parse_statement(prob['topic_cn'], None, prob['answer'])
         else:
-            en = parse_statement(prob['topic'], prob['options'])
-            cn = parse_statement(prob['topic_cn'], prob['options_cn'])
+            en = parse_statement(prefix + prob['topic'], prob['options'], index=index)
+            cn = parse_statement(prefix + prob['topic_cn'], prob['options_cn'], index=index)
             en_ans = parse_statement(prob['topic'], prob['options'], prob['answer'])
             cn_ans = parse_statement(prob['topic_cn'], prob['options_cn'], prob['answer'])
             # print(en_ans)
@@ -78,7 +85,7 @@ for chapter in os.listdir(source_dir):
         for task in tasks:
             for field in task['fields']:
                 task['data'].append(eval(f'{field}'))
-        task['data'].append('#v(1em)')
+        task['data'].append('#spacing')
 
 for task in tasks:
     filename = os.path.join(output_dir, f'{task["name"]}.typ')
