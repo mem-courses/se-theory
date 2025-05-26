@@ -1,7 +1,7 @@
 import os
 import json
 
-from utils.prompts import EXPLAIN_PROMPT
+from utils.prompts import EXPLAIN_PROMPT, SIMPLIFY_EXPLAIN_PROMPT
 from utils.model import OpenAIWrapper
 from utils.config import *
 
@@ -31,10 +31,13 @@ for chapter in os.listdir(source_dir):
         print('Explaining problem %s...' % prob['name'])
         print(statement)
         message = EXPLAIN_PROMPT % statement
-        explanation = model.send(message).strip().replace('\n', '')
+        expl = model.send(message).strip().replace('\n', '')
 
-        exp_filename = os.path.join(output_dir, chapter, problem + '.md')
-        if not os.path.exists(os.path.dirname(exp_filename)):
-            os.makedirs(os.path.dirname(exp_filename))
-        with open(exp_filename, 'w', encoding='utf-8') as f:
-            f.write(explanation)
+        message = SIMPLIFY_EXPLAIN_PROMPT % (statement, expl)
+        simplified_expl = model.send(message).strip().replace('\n', '')
+
+        expl_filename = os.path.join(output_dir, chapter, problem + '.md')
+        if not os.path.exists(os.path.dirname(expl_filename)):
+            os.makedirs(os.path.dirname(expl_filename))
+        with open(expl_filename, 'w', encoding='utf-8') as f:
+            f.write(simplified_expl)
