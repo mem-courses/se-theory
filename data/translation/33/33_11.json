@@ -1,0 +1,1 @@
+{"chapter": "33", "topic": "11. LOC-based estimation techniques require problem decomposition based on", "answer": ["C"], "options": ["information domain values", "project schedule", "software functions", "process activities"], "id": "11", "name": "33_11", "type": "MC", "topic_cn": "11. 基于代码行数（LOC）的估算技术需要基于什么进行问题分解？", "options_cn": ["信息域值", "项目进度安排", "软件功能", "过程活动"]}

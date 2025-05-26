@@ -1,0 +1,1 @@
+{"chapter": "13", "topic": "16. A useful technique for evaluating the overall complexity of a proposed architecture is to look at the component", "answer": ["B", "C"], "options": ["cohesion", "flow dependencies", "sharing dependencies", "size"], "id": "16", "name": "13_16", "type": "MR", "topic_cn": "16. 评估拟议架构整体复杂性的一个有用方法是查看组件的", "options_cn": ["内聚性", "流程依赖", "共享依赖", "规模"]}

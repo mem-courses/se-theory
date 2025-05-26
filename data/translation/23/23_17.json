@@ -1,0 +1,1 @@
+{"chapter": "23", "topic": "17. Test derived from behavioral class models should be based on the", "answer": ["C"], "options": ["data flow diagram", "object-relation diagram", "state transition diagram", "use-case diagram"], "id": "17", "name": "23_17", "type": "MC", "topic_cn": "17. 基于行为类模型的测试应基于", "options_cn": ["数据流图", "对象关系图", "状态转换图", "用例图"]}

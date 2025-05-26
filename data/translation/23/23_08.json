@@ -1,0 +1,1 @@
+{"chapter": "23", "topic": "8. The cyclomatic complexity of a program can be computed directly from a PDL representation of an algorithm without drawing a program flow graph.", "answer": ["T"], "id": "08", "name": "23_08", "type": "TF", "topic_cn": "8. 程序的圈复杂度可以直接通过算法的PDL（程序设计语言）表示计算出来，而无需绘制程序流程图。"}

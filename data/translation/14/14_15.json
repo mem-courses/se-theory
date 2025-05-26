@@ -1,0 +1,1 @@
+{"chapter": "14", "topic": "15. In component-based software engineering, the development team examines the requirements to see which are amenable to composition, rather than construction, before beginning detailed design tasks.", "answer": ["T"], "id": "15", "name": "14_15", "type": "TF", "topic_cn": "15. 在基于构件的软件工程中，开发团队在开始详细设计任务之前，会检查需求，看看哪些需求适合通过组合实现，而不是通过构建实现。"}

@@ -1,0 +1,1 @@
+{"chapter": "24", "topic": "7. Encapsulation of attributes and operations inside objects makes it easy to obtain object state information during testing.", "answer": ["F"], "id": "07", "name": "24_07", "type": "TF", "topic_cn": "7. 将属性和操作封装在对象内部，使得在测试过程中容易获取对象的状态信息。"}

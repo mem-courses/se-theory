@@ -1,0 +1,1 @@
+{"chapter": "25", "topic": "13. Which test case design technique(s) are appropriate for WebApp component-level testing?", "answer": ["D"], "options": ["Boundary value analysis", "Equivalence partitioning", "Path testing", "All of the above"], "id": "13", "name": "25_13", "type": "MC", "topic_cn": "13. 哪些测试用例设计技术适用于WebApp组件级测试？", "options_cn": ["边界值分析", "等价类划分", "路径测试", "以上全部"]}

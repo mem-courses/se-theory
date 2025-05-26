@@ -1,0 +1,1 @@
+{"chapter": "28", "topic": "16. In formal methods work, an action that reads or writes data to a state is called a(n)", "answer": ["D"], "options": ["actor", "event", "invariant", "operation"], "id": "16", "name": "28_16", "type": "MC", "topic_cn": "16. 在形式化方法工作中，读取或写入状态数据的动作被称为", "options_cn": ["参与者", "事件", "不变式", "操作"]}

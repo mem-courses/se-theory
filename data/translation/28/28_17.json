@@ -1,0 +1,1 @@
+{"chapter": "28", "topic": "17. What defines the circumstances in which a particular operation is valid?", "answer": ["B"], "options": ["data invariant", "precondition", "postcondition", "state"], "id": "17", "name": "28_17", "type": "MC", "topic_cn": "17. 什么定义了特定操作有效的条件？", "options_cn": ["数据不变式", "前置条件", "后置条件", "状态"]}

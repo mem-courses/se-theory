@@ -1,0 +1,1 @@
+{"chapter": "24", "topic": "1. It is not possible to test object-oriented software without including error discovery techniques applied to the system OOA and OOD models.", "answer": ["T"], "id": "01", "name": "24_01", "type": "TF", "topic_cn": "1. 如果不将错误发现技术应用于系统的面向对象分析（OOA）和面向对象设计（OOD）模型，就无法对面向对象软件进行测试。"}

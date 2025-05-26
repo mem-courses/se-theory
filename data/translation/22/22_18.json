@@ -1,0 +1,1 @@
+{"chapter": "22", "topic": "18. Configuration reviews are not needed if regression testing has been rigorously applied during software integration.", "answer": ["F"], "id": "18", "name": "22_18", "type": "TF", "topic_cn": "18. 如果在软件集成过程中已经严格进行了回归测试，则不需要进行配置评审。"}

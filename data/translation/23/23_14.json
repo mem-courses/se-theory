@@ -1,0 +1,1 @@
+{"chapter": "23", "topic": "14. Equivalence testing divides the input domain into classes of data from which test cases can be derived to reduce the total number of test cases that must be developed.", "answer": ["T"], "id": "14", "name": "23_14", "type": "TF", "topic_cn": "14. 等价类测试将输入域划分为数据类，从这些数据类中可以派生测试用例，以减少必须开发的测试用例总数。"}

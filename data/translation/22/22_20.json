@@ -1,0 +1,1 @@
+{"chapter": "22", "topic": "20. Recovery testing is a system test that forces the software to fail in a variety of ways and verifies that software is able to continue execution without interruption.", "answer": ["F"], "id": "20", "name": "22_20", "type": "TF", "topic_cn": "20. 恢复测试是一种系统测试，它通过多种方式强制软件发生故障，并验证软件是否能够不中断地继续执行。"}

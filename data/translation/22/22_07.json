@@ -1,0 +1,1 @@
+{"chapter": "22", "topic": "7. Units and stubs are not needed for unit testing because the modules are tested independently of one another.", "answer": ["F"], "id": "07", "name": "22_07", "type": "TF", "topic_cn": "7. 单元测试不需要单元和桩，因为各个模块是相互独立测试的。"}
