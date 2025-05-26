@@ -1,8 +1,7 @@
 import os
-import sys
 import json
 
-VERSION = 1.0
+VERSION = 2.0
 
 TEMPLATE_HEADER = f'''
 #import "../docs/template.typ": *
@@ -11,6 +10,7 @@ TEMPLATE_HEADER = f'''
     "https://mem.ac",
     [*客观题题库* (v{VERSION})],
   ),
+  header-content: "软件工程 / 客观题题库 (v{VERSION}) / mem 整理版",
 )
 
 #hint
@@ -51,7 +51,7 @@ tasks = [
     }
 ]
 for task in tasks:
-    task['name'] = f'SE_v{VERSION}_{'+'.join(task["fields"])}'
+    task['name'] = f'软工题库mem整理版_v{VERSION}_{'+'.join(task["fields"])}'
     task['data'] = []
 
 index = 0
@@ -80,7 +80,7 @@ for chapter in os.listdir(source_dir):
         with open(os.path.join(explaination_dir, chapter, problem + '.md'), 'r', encoding='utf-8') as f:
             explaination = f.read()
         expl = parse_explaination(explaination)
-        expl_ans = parse_explaination(explaination + '\n\n' + cn_ans)
+        expl_ans = parse_explaination(explaination + '][' + cn_ans)
 
         for task in tasks:
             for field in task['fields']:
@@ -92,3 +92,4 @@ for task in tasks:
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(TEMPLATE_HEADER + '\n\n\n')
         f.write('\n\n'.join(task['data']))
+        f.write('\n\n#v(2em)\n\n#hint')

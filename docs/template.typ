@@ -12,6 +12,7 @@
 #let project(
   course: "软件工程",
   title: "",
+  header-content: "",
   authors: (
     (
       name: "memset0",
@@ -24,7 +25,7 @@
   semester: "Spring-Summer 2025",
   course-code: "CS3165M",
   course-fullname: "Software Engineering",
-  page-margin: (left: 6mm, right: 6mm, top: 12mm, bottom: 10mm),
+  page-margin: (left: 6mm, right: 6mm, top: 12mm, bottom: 4mm),
 ) = {
   if (course-fullname == "") {
     course-fullname = course
@@ -49,17 +50,20 @@
           return none
         }
 
-        set text(font: font-song, size: 10pt, baseline: 3mm)
+        set text(font: font-song, size: 8pt, baseline: 6pt)
 
         grid(
-          columns: (1fr, 1fr, 1fr),
-          align(left, title),
-          [] /* align(center, title)*/,
+          columns: (3fr, 1fr),
+          align(
+            left,
+            [
+              #header-content
+            ],
+          ),
           align(
             right,
             [
-              #course-fullname
-              (#course-code)
+              第 #counter(page).display("1/1", both: true) 页
             ],
           ),
         )
@@ -67,20 +71,7 @@
         line(length: 100%, stroke: 0.5pt)
       })
     },
-  )
-
-
-  // 页脚
-  set page(
-    footer: {
-      set text(font: font-song, size: 8pt)
-      set align(center)
-
-      grid(
-        columns: (1fr, 1fr),
-        align(left, authors.map(a => a.name).join(", ")), align(right, counter(page).display("1/1", both: true)),
-      )
-    },
+    footer: none,
   )
 
   set text(font: font-song, lang: "en", size: 10pt)
@@ -153,6 +144,10 @@
   }
 }
 
+#let _style-stroke = 0.375pt + black
+#let _style-stroke-dashed = (paint: black, thickness: 0.375pt, dash: "densely-dashed")
+#let _style-inset = 0.3125em
+
 #let statement = it => par(strong(it))
 
 #let options = (..cells) => block(
@@ -168,35 +163,59 @@
 #let correct-option = it => {
   underline(
     evade: false,
-    offset: 0.2em,
+    offset: 0.15em,
     strong(it),
   )
 }
 
-#let explaination = it => block(
-  stroke: 0.375pt + black,
+#let explaination = (..it) => block(
+  stroke: _style-stroke,
   radius: 0.125em,
-  inset: 0.275em,
   breakable: true,
+  clip: true,
   {
     set text(size: 0.6em)
     set par(justify: true)
-    it
+    table(
+      columns: 1fr,
+      stroke: _style-stroke-dashed,
+      inset: _style-inset,
+      align: horizon + left,
+      ..it,
+    )
+    // stack(..(
+    //   it
+    //     .pos()
+    //     .enumerate()
+    //     .map(((idx, it)) => {
+    //       if idx > 0 {
+    //         line(length: 100%, stroke: _style-stroke)
+    //       }
+    //       block(
+    //         spacing: 0em,
+    //         inset: _style-inset,
+    //         breakable: true,
+    //         it,
+    //       )
+    //     })
+    // ))
   },
 )
 
-#let spacing = v(1em)
+#let spacing = v(0.5em)
 
 #let index = it => {
   h(1fr)
   super(text(weight: "regular")[#it])
 }
 
+#let hr = block(line(length: 100% + _style-inset * 2, stroke: _style-stroke))
+
 #let hint = {
-  block(
-    [
-      感谢小角龙学长爬取的题目源数据，使用 GPT 4.1 制作翻译和题目解析。问题反馈请联系 \@memset0
-    ]
-  )
+  block([
+    #set text(weight: "semibold")
+    #set par(justify: true)
+    本题目集由 \@memset0 制作，如有任何问题欢迎反馈。题目集源自课程组官网例题，翻译和题目解析使用 GPT 4.1 生成，感谢小角龙学长爬取的题目数据。
+  ])
   v(1em)
 }
