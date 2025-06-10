@@ -25,7 +25,7 @@
   semester: "Spring-Summer 2025",
   course-code: "CS3165M",
   course-fullname: "Software Engineering",
-  page-margin: (left: 6mm, right: 6mm, top: 12mm, bottom: 4mm),
+  page-margin: (left: 6mm, right: 6mm, top: 10mm, bottom: 4mm),
 ) = {
   if (course-fullname == "") {
     course-fullname = course
@@ -50,7 +50,7 @@
           return none
         }
 
-        set text(font: font-song, size: 8pt, baseline: 6pt)
+        set text(font: font-song, size: 8pt, baseline: 0.5pt)
 
         grid(
           columns: (3fr, 1fr),
@@ -69,6 +69,7 @@
         )
 
         line(length: 100%, stroke: 0.5pt)
+        v(-4pt)
       })
     },
     footer: none,
@@ -76,42 +77,6 @@
 
   set text(font: font-song, lang: "en", size: 10pt)
   show math.equation: set text(weight: 400)
-
-  // set heading(numbering: "1.1)")
-
-  block(
-    stroke: 0.5pt + black,
-    radius: 0.25em,
-    width: 100%,
-    inset: 1em,
-    outset: -0.2em,
-  )[
-    #text(size: 0.8em)[#grid(
-        columns: (auto, 1fr, auto),
-        align(left, strong(course-code)), [], align(right, strong(course-fullname)),
-      )]
-    // #v(0.5em)
-    #align(center)[#text(size: 1.25em)[#title]]
-    // #v(0.5em)
-    #block(
-      ..authors.map(author => align(center)[
-        #text(size: 0.8em)[#grid(
-            columns: (auto, 1fr, auto),
-            align(
-              left,
-              {
-                author.name
-                if "id" in author {
-                  " (" + author.id + ")"
-                }
-              },
-            ),
-            [],
-            align(right, author.email),
-          )]
-      ]),
-    )
-  ]
 
   // Main body.
 
@@ -140,7 +105,46 @@
   }
 
   {
-    columns(3, gutter: 1em, body)
+    columns(
+      3,
+      gutter: 1em,
+      {
+        block(
+          stroke: 0.5pt + black,
+          radius: 0.25em,
+          width: 100%,
+          inset: 0.5em,
+        )[
+          #text(size: 0.7em)[#grid(
+              columns: (auto, 1fr, auto),
+              align(left, strong(course-code)), [], align(right, strong(course-fullname)),
+            )]
+          // #v(0.5em)
+          #align(center)[#text(size: 1.25em)[#title]]
+          // #v(0.5em)
+          #block(
+            ..authors.map(author => align(center)[
+              #text(size: 0.8em)[#grid(
+                  columns: (auto, 1fr, auto),
+                  align(
+                    left,
+                    {
+                      author.name
+                      if "id" in author {
+                        " (" + author.id + ")"
+                      }
+                    },
+                  ),
+                  [],
+                  align(right, author.email),
+                )]
+            ]),
+          )
+        ]
+
+        body
+      },
+    )
   }
 }
 
@@ -211,11 +215,24 @@
 
 #let hr = block(line(length: 100% + _style-inset * 2, stroke: _style-stroke))
 
+#import "@preview/cades:0.3.0": qr-code
+
 #let hint = {
-  block([
-    #set text(weight: "semibold")
+  v(0.5em)
+  block(width: 100%)[
     #set par(justify: true)
-    本题目集由 \@memset0 制作，如有任何问题欢迎反馈。题目集源自课程组官网例题，翻译和题目解析使用 GPT 4.1 生成，感谢小角龙学长爬取的题目数据。
-  ])
+    #grid(
+      columns: (1fr, auto),
+      gutter: 0.5em,
+      [
+        #set text(weight: "semibold", size: 0.9em)
+        本题目集由 #link("https://mem.ac/", [\@memset0]) 制作，如有问题可扫描右侧二维码在 CC98 留言反馈。
+        - 题面爬取自课程组官网，感谢 \@小角龙 学长。
+        - 使用 GPT 4.1 生成题目的中文翻译与解析。
+        - 因原网站只支持单选，多选题通过增设 E 选项给出，现将其拆分为期末考形式的多选题。
+      ],
+      qr-code("https://www.cc98.org/topic/6210399", width: 6.25em),
+    )
+  ]
   v(1em)
 }

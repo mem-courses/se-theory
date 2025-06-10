@@ -1,7 +1,7 @@
 import os
 import json
 
-VERSION = 2.0
+VERSION = 3.0
 
 TEMPLATE_HEADER = f'''
 #import "../docs/template.typ": *
